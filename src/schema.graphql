@@ -1,0 +1,16 @@
+# source: http://localhost:3000/graphql
+# timestamp: Mon Nov 20 2017 13:12:20 GMT+0900 (JST)
+
+type Link {
+  id: ID!
+  url: String!
+  description: String!
+}
+
+type Mutation {
+  createLink(url: String!, description: String!): Link
+}
+
+type Query {
+  allLinks: [Link!]!
+}
