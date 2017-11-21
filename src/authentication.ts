@@ -1,6 +1,6 @@
+import {User} from './types';
 import {Request} from 'express';
 import {Collection} from 'mongodb';
-import {User} from './schema/resolvers';
 
 const HEADER_REGEX = /bearer token-(.*)$/;
 

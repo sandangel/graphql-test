@@ -1,11 +1,12 @@
 import * as express from 'express';
 import {graphiqlExpress, graphqlExpress} from 'apollo-server-express';
 import * as bodyParser from 'body-parser';
+import {Request, Response} from 'express';
 
 import schema from './schema';
 import connectMongo from './mongo-connector';
 import authenticate from './authentication';
-import {Request, Response} from 'express';
+import buildDataloaders from './dataloader';
 
 const start = async () => {
   const mongo = await connectMongo();
@@ -16,7 +17,7 @@ const start = async () => {
     if (!req) return {schema, context: {mongo}};
     const user = await authenticate(req, mongo.Users);
     return {
-      context: {mongo, user},
+      context: {mongo, user, dataloaders: buildDataloaders(mongo)},
       schema
     };
   };

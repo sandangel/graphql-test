@@ -1,16 +1,44 @@
-# source: http://localhost:3000/graphql
-# timestamp: Mon Nov 20 2017 13:12:20 GMT+0900 (JST)
-
 type Link {
   id: ID!
   url: String!
   description: String!
-}
-
-type Mutation {
-  createLink(url: String!, description: String!): Link
+  postedBy: User
+  votes: [Vote!]!
 }
 
 type Query {
   allLinks: [Link!]!
+}
+
+type Mutation {
+  createLink(url: String!, description: String!): Link
+  createUser(name: String!, authProvider: AuthProviderSignupData!): User
+  signinUser(email: AUTH_PROVIDER_EMAIL): SigninPayload!
+  createVote(linkId: ID!): Vote
+}
+
+type Vote {
+  id: ID!
+  user: User!
+  link: Link!
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String
+}
+
+type SigninPayload {
+  token: String
+  user: User
+}
+
+input AuthProviderSignupData {
+  email: AUTH_PROVIDER_EMAIL
+}
+
+input AUTH_PROVIDER_EMAIL {
+  email: String!
+  password: String!
 }

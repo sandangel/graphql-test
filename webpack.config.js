@@ -17,6 +17,11 @@ module.exports = {
         test: /\.ts$/,
         use: 'ts-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.graphql$/,
+        use: 'raw-loader',
+        exclude: /node_modules/
       }
     ]
   },
